@@ -3226,7 +3226,7 @@ __FdoCreateMemoryHole(
     PXENBUS_HOLE    Hole = &Fdo->Hole;
     PMDL            Mdl;
     PFN_NUMBER      Pfn;
-    NTSTATUS        status;
+    //NTSTATUS        status;
 
     Mdl = Fdo->Mdl;
     Hole->VirtualAddress = MmGetSystemAddressForMdlSafe(Mdl, NormalPagePriority);
@@ -3235,14 +3235,15 @@ __FdoCreateMemoryHole(
     Hole->PhysicalAddress.QuadPart = (ULONGLONG)Pfn << PAGE_SHIFT;
 
     Hole->Count = BYTES_TO_PAGES(Mdl->ByteCount);
+    /*
     ASSERT3U(Hole->Count, ==, 1u << PAGE_ORDER_2M);
-
     status = STATUS_UNSUCCESSFUL;
     if (MemoryDecreaseReservation(PAGE_ORDER_2M, 1, &Pfn) != 1)
         goto fail1;
+    */
 
     return STATUS_SUCCESS;
-
+    /*
 fail1:
     Error("fail1 (%08x)\n", status);
 
@@ -3251,6 +3252,7 @@ fail1:
     Hole->VirtualAddress = NULL;
 
     return status;
+    */
 }
 
 static FORCEINLINE VOID
@@ -3259,6 +3261,7 @@ __FdoDestroyMemoryHole(
     )
 {
     PXENBUS_HOLE    Hole = &Fdo->Hole;
+    /*
     PMDL            Mdl;
     PFN_NUMBER      Pfn;
     ULONG           Index;
@@ -3276,8 +3279,8 @@ __FdoDestroyMemoryHole(
 
         Pfn++;
     }
-
 done:
+    */
     Hole->Count = 0;
     Hole->PhysicalAddress.QuadPart = 0;
     Hole->VirtualAddress = NULL;

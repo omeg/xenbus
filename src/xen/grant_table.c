@@ -289,6 +289,8 @@ GrantTableQuerySize(
     if (op.status != GNTST_okay)
         goto fail2;
 
+    Info("current: %u, max: %u\n", op.nr_frames, op.max_nr_frames);
+
     if (Current != NULL)
         *Current = op.nr_frames;
 

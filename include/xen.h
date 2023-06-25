@@ -129,7 +129,7 @@ MemoryAddToPhysmap(
     );
 
 #define PAGE_ORDER_4K   0
-#define PAGE_ORDER_2M   9
+#define PAGE_ORDER_2M   12
 
 __checkReturn
 XEN_API
